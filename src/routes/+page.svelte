@@ -70,13 +70,7 @@
       .style('opacity', 0.7)
       .style('outline-style', 'inset')
       .style('outline', 'thin solid blue')
-      .on('mouseover', (el, shift) => {
-        console.log(
-          mmss_from_seconds(shift.startTimeS),
-          mmss_from_seconds(shift.endTimeS),
-          shift.durationS / 4
-        );
-      });
+      .on('mouseover', (el, shift) => {});
   });
 </script>
 
