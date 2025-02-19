@@ -32,9 +32,9 @@
       .map((sh) => sh.playerName)
   );
   // set the dimensions and margins of the graph
-  let margin = { top: 10, right: 30, bottom: 20, left: 100 },
+  let margin = { top: 20, right: 30, bottom: 20, left: 100 },
     width = 1200 - margin.left - margin.right,
-    height = 550 - margin.top - margin.bottom;
+    height = 700 - margin.top - margin.bottom;
   let y = $derived(
     d3
       .scaleBand()
@@ -60,10 +60,10 @@
       // Update x axis
       x.range([margin.left, width - margin.right].map((d) => event.transform.applyX(d)));
       const { k, x: dx, y: dy } = event.transform;
-      console.log(k, dx, dy);
+      console.log(k, dx, dy, dx / dy);
       d3.select(gx).transition().call(d3.axisBottom(x));
       d3.selectAll('.shift-box rect').attr('transform', `translate(${dx}, 0) scale(${k}, 1)`);
-      // d3.selectAll('.shift-box circle').attr('transform', `scale(${k}, 1)`);
+      // TODO: Figure out how to scale this without changing the width of the circle
       d3.selectAll('.shift-box circle').attr('transform', ` translate(${dx}, 0) scale(${k}, 1)`);
     }
   }
@@ -111,8 +111,6 @@
       .attr('height', y.bandwidth())
       .attr('width', (shift: Shift) => scale_secs_to_width(shift.durationS, width, margin))
       .attr('fill', (shift: Shift) => shift.color);
-    // .style('opacity', 0.5)
-    // .call(zoom);
 
     shifts.forEach((shift) => {
       d3.select(`.s-${shift.id}`)
@@ -137,7 +135,7 @@
   });
 </script>
 
-<div class="flex h-full w-full flex-col items-center justify-center">
+<div class="flex h-full w-full flex-col lg:items-center lg:justify-center">
   <div class="mx-5 overflow-scroll shadow-lg shadow-black">
     <div class="chart h-fit bg-muted">
       <svg {width} {height}>
