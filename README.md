@@ -1,18 +1,29 @@
-# sv
+# statvized
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+extremely detailed dataviz from available nhl.com data
 
-## Creating a project
+## Roadmap
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [ ] shift chart for any game (dropdown)
+- [ ] populate shift with plays given any shift
+    - [ ] calculate CF/CA/FF/FA/TOI etc per shift
+    - [ ] hovering over shift should give shift info in a shift card
+- [ ] populate player with all plays
+    - [ ] aggregate stats across shift
+    - [ ] player card to the side with all aggregated stats
+    - [ ] hovering over shift should give shift info
+- [ ] rink viz card
+    - [ ] plot out (x,y) coords of play
+        - [ ] highlight all involved players per play
+- [ ] goal viz
+    - [ ] animate all players on ice
+    - [ ] table for monitoring physical details (velocity/acceleration/position)
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Devlog
 
-# create a new project in my-app
-npx sv create my-app
-```
+### v0.0.0 [current]
+
+- WIP
 
 ## Developing
 
