@@ -1,5 +1,6 @@
 import { parseTime } from "@internationalized/date";
 
+export const PERIOD_COUNT = 3;
 export const PERIOD_LENGTH_S = 20 * 60;
 export const INTERMISSION_LENGTH_S = 20 * 60;
 
@@ -18,7 +19,20 @@ export function mmss_from_seconds(seconds?: number | null): string {
 export function seconds_since_start(timestr: string | null, period: number, period_length_s: number = PERIOD_LENGTH_S) {
     return (period - 1) * period_length_s + seconds_from_mmss(timestr);
 }
+
 export function to_fixed(input: number | string, sf: number = 2): number {
     if (typeof input === 'string') return NaN;
     return ((input * Math.pow(10, sf)) | 0) / Math.pow(10, sf);
+}
+
+export function scale_secs_to_width(
+    time_s: number,
+    width: number,
+    margin: { left: number, right: number },
+    period_count: number = PERIOD_COUNT,
+    period_length_s: number = PERIOD_LENGTH_S,
+) {
+    const actual_width = (width - margin.left - margin.right);
+    const total_s = period_count * period_length_s;
+    return time_s / total_s * actual_width;
 }
