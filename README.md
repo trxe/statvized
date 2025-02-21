@@ -4,11 +4,11 @@ extremely detailed dataviz from available nhl.com data
 
 ## Roadmap
 
-- [ ] shift chart for any game (dropdown)
-- [ ] populate shift with plays given any shift
+- [x] shift chart for any game (dropdown)
+- [x] populate shift with plays given any shift
     - [ ] calculate CF/CA/FF/FA/TOI etc per shift
     - [ ] hovering over shift should give shift info in a shift card
-- [ ] populate player with all plays
+- [x] populate player with all plays
     - [ ] aggregate stats across shift
     - [ ] player card to the side with all aggregated stats
     - [ ] hovering over shift should give shift info
@@ -23,7 +23,10 @@ extremely detailed dataviz from available nhl.com data
 
 ### v0.0.0 [current]
 
-- WIP
+- Shift chart
+- Add event info
+- Rough prototype with server redirection to correct game for visualization
+- Handle ongoing game
 
 ## Developing
 
