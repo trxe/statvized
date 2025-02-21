@@ -1,7 +1,6 @@
 // import * as shiftcharts from '$lib/data/shiftcharts-2024020861.json'
 // import * as play_by_play from '$lib/data/play_by_play-2024020861.json'
 export const load = async ({ url, fetch, params }) => {
-    await fetch("https://api-web.nhle.com/v1/gamecenter/2024200007/landing",);
     const game_id = params.game ?? '2024200007';
     const shiftcharts_url = new URL("rest/en/shiftcharts", "https://api.nhle.com/stats/")
     shiftcharts_url.searchParams.append("cayenneExp", `gameId=${game_id}`);
