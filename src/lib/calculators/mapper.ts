@@ -40,8 +40,12 @@ function find_shift_in_sorted_list(shift_list: Shift[], time_s: number): Shift |
     return null;
 }
 
-export function add_plays_to_shift(plays: NHLPlay[], shifts: Shift[]): Shift[] {
+export function add_plays_to_shift(plays: NHLPlay[], shifts: Shift[]): {
+    'shifts': Shift[],
+    'unplotted_plays': PlayerPlay[]
+} {
     let count = 0;
+    let unplotted_plays: PlayerPlay[] = [];
     const player_shifts = new Map<NId, Shift[]>();
     shifts.forEach((shift) => {
         if (!player_shifts.has(shift.playerId)) {
@@ -57,21 +61,24 @@ export function add_plays_to_shift(plays: NHLPlay[], shifts: Shift[]): Shift[] {
         Object.entries(play.details ?? {})
             .forEach(([key, playerId]) => {
                 if (typeof playerId != 'number' || !key.toLowerCase().includes('playerid')) return;
-                const shift_list = player_shifts.get(playerId);
-                if (!shift_list?.length) return;
-                const shift = find_shift_in_sorted_list(shift_list, time_s);
-                if (!shift) {
-                    console.warn("no shift?", time_s, shift_list)
-                    return;
-                };
-                shift.plays.push({
+                const playerplay = {
                     playerId,
                     play,
                     role: key.replaceAll('playerId', '').replaceAll('playerId', ''),
                     typeDescKey: play.typeDescKey,
                     secSinceStart: time_s
-                });
+                }
+                const shift_list = player_shifts.get(playerId);
+                if (!shift_list?.length) return;
+                const shift = find_shift_in_sorted_list(shift_list, time_s);
+                if (!shift) {
+                    // console.warn("no shift?", time_s, shift_list)
+                    unplotted_plays.push(playerplay);
+                } else {
+                    shift.plays.push(playerplay);
+
+                }
             });
     });
-    return shifts;
+    return { shifts, unplotted_plays };
 }
