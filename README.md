@@ -23,7 +23,10 @@ extremely detailed dataviz from available nhl.com data
 
 ### v0.0.0 [current]
 
-- WIP
+- Shift chart
+- Add event info
+- Rough prototype with server redirection to correct game for visualization
+- Handle ongoing game
 
 ## Developing
 
