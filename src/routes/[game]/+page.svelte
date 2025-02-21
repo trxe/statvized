@@ -63,7 +63,6 @@
   }
 
   $effect(() => {
-    console.log('plays');
     let shifts_plays: {
       shifts: Shift[];
       unplotted_plays: PlayerPlay[];
@@ -71,7 +70,7 @@
     let { shifts, unplotted_plays } = shifts_plays;
     d3.select(gy).call(d3.axisLeft(y));
     d3.select(gx)
-      .call(d3.axisBottom(x).ticks(12).tickFormat(mmss_from_seconds))
+      .call(d3.axisBottom(x).ticks(20).tickFormat(mmss_from_seconds))
       .append('text')
       .attr('x', width - margin.right + 5)
       .attr('y', 5)
@@ -122,7 +121,6 @@
       .attr('fill', (shift: Shift) => shift.color);
 
     shifts.forEach((shift) => {
-      console.log(shift);
       d3.select(`.s-${shift.id}`)
         .append('g')
         .selectAll()
@@ -139,10 +137,6 @@
         )
         .attr('cy', (play: PlayerPlay) => {
           const player = players.get(play.playerId);
-          console.log(
-            'where am i',
-            `${player?.firstName?.default} ${player?.lastName?.default}` ?? ''
-          );
           return (
             y(`${player?.firstName?.default} ${player?.lastName?.default}` ?? '') +
             y.bandwidth() / 2
@@ -172,7 +166,6 @@
         (play: PlayerPlay) => scale_secs_to_width(play.secSinceStart, width, margin) + margin.left
       )
       .attr('cy', (play: PlayerPlay) => {
-        // console.log('where am i', play);
         const player = players.get(play.playerId);
         return (
           y(`${player?.firstName?.default} ${player?.lastName?.default}` ?? '') + y.bandwidth() / 2
